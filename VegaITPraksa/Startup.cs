@@ -13,6 +13,8 @@ using Microsoft.OpenApi.Models;
 using VegaITPraksa.Data;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore;
+using VegaITPraksa.Services;
+using VegaITPraksa.Repository;
 
 namespace VegaITPraksa
 {
@@ -28,10 +30,12 @@ namespace VegaITPraksa
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITeamMemberService, TeamMemberRepository>();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11)));
             });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

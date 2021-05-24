@@ -11,9 +11,9 @@ namespace VegaITPraksa.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
-        public DbSet<TeamMember> Users { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
