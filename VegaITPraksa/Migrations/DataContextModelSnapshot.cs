@@ -69,8 +69,8 @@ namespace VegaITPraksa.Migrations
                     b.Property<Guid?>("CustomerClientId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("LeadTeamMemberId")
-                        .HasColumnType("char(36)");
+                    b.Property<int?>("LeadTeamMemberId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProjectDescription")
                         .HasColumnType("longtext");
@@ -89,9 +89,9 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Role", b =>
                 {
-                    b.Property<Guid>("RoleId")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<string>("RoleName")
                         .HasColumnType("longtext");
@@ -103,9 +103,9 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>
                 {
-                    b.Property<Guid>("TeamMemberId")
+                    b.Property<int>("TeamMemberId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
@@ -119,10 +119,10 @@ namespace VegaITPraksa.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
 
-                    b.Property<Guid?>("UserRoleRoleId")
-                        .HasColumnType("char(36)");
+                    b.Property<int?>("TeamMemberRoleRoleId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserStatus")
+                    b.Property<int>("TeamMemberStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
@@ -130,9 +130,9 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("TeamMemberId");
 
-                    b.HasIndex("UserRoleRoleId");
+                    b.HasIndex("TeamMemberRoleRoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("team_member");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TimeSheet", b =>
@@ -153,8 +153,8 @@ namespace VegaITPraksa.Migrations
                     b.Property<Guid?>("ProjectId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("TeamMemberId")
-                        .HasColumnType("char(36)");
+                    b.Property<int?>("TeamMemberId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Time")
                         .HasColumnType("double");
@@ -175,7 +175,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasIndex("TeamMemberId");
 
-                    b.ToTable("TimeSheet");
+                    b.ToTable("time_sheet");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
@@ -195,11 +195,11 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>
                 {
-                    b.HasOne("VegaITPraksa.Models.Role", "UserRole")
-                        .WithMany("Users")
-                        .HasForeignKey("UserRoleRoleId");
+                    b.HasOne("VegaITPraksa.Models.Role", "TeamMemberRole")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("TeamMemberRoleRoleId");
 
-                    b.Navigation("UserRole");
+                    b.Navigation("TeamMemberRole");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TimeSheet", b =>
@@ -246,7 +246,7 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Role", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("TeamMembers");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>

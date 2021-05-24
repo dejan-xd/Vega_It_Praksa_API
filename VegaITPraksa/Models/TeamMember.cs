@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace VegaITPraksa.Models
 {
-    public enum UserStatus
+    public enum TeamMemberStatus
     {
         ACTIVE,
         INACTIVE
     }
 
+    [Table("team_member")]
     public class TeamMember
     {
         public TeamMember()
@@ -20,14 +22,15 @@ namespace VegaITPraksa.Models
             Projects = new HashSet<Project>();
         }
 
-        public Guid TeamMemberId { get; set; }
+        [Key]
+        public int TeamMemberId { get; set; }
         public string Name { get; set; }
         public double HoursPerWeek { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserStatus UserStatus { get; set; }
-        public virtual Role UserRole { get; set; }
+        public TeamMemberStatus TeamMemberStatus { get; set; }
+        public virtual Role TeamMemberRole { get; set; }
         public virtual ICollection<TimeSheet> TimeSheets { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
     
