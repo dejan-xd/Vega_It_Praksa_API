@@ -13,10 +13,16 @@ namespace VegaITPraksa.DTO
         {
         }
 
+        public RoleDTO(int roleId, string roleName)
+        {
+            RoleId = roleId;
+            RoleName = roleName;
+        }
+
+
         public int RoleId { get; set; }
         [Required]
         public string RoleName { get; set; }
-        public virtual ICollection<TeamMemberDTO> TeamMembers { get; set; }
     }
 
 }
