@@ -14,7 +14,8 @@ namespace VegaITPraksa.Models
             TimeSheet = new HashSet<TimeSheet>();
         }
 
-        public Guid CategoryId { get; set; }
+        [Key]
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public virtual ICollection<TimeSheet> TimeSheet { get; set; }
     }

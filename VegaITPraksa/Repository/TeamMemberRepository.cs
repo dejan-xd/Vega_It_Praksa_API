@@ -36,12 +36,14 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<TeamMember>> Get()
         {
-            return await _db.TeamMembers.ToListAsync();
+            return await _db.TeamMembers.Include(i => i.TeamMemberRole).ToListAsync();
+            //return await _db.TeamMembers.ToListAsync();
         }
 
         public async Task<TeamMember> Get(int id)
         {
-            return await _db.TeamMembers.FindAsync(id);
+            return await _db.TeamMembers.Include(i => i.TeamMemberRole).FirstOrDefaultAsync(i => i.TeamMemberId == id);
+            //return await _db.TeamMembers.FindAsync(id);
         }
 
         public async Task Update(TeamMember teamMember)

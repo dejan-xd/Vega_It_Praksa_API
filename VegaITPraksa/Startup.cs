@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore;
 using VegaITPraksa.Services;
 using VegaITPraksa.Repository;
+using AutoMapper;
+using VegaITPraksa.DTO;
 
 namespace VegaITPraksa
 {
@@ -31,12 +33,28 @@ namespace VegaITPraksa
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITeamMemberService, TeamMemberRepository>();
+            services.AddScoped<IRoleService, RoleRepository>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new SimpleMappings());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11)));
             });
 
             services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VegaITPraksa", Version = "v1" });

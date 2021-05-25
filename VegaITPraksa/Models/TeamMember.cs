@@ -30,9 +30,11 @@ namespace VegaITPraksa.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public TeamMemberStatus TeamMemberStatus { get; set; }
+        public int RoleId { get; set; }
+        [ForeignKey("RoleId")]
         public virtual Role TeamMemberRole { get; set; }
         public virtual ICollection<TimeSheet> TimeSheets { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
-    
+
     }
 }

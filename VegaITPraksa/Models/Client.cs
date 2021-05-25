@@ -15,7 +15,8 @@ namespace VegaITPraksa.Models
             Projects = new HashSet<Project>();
         }
 
-        public Guid ClientId { get; set; }
+        [Key]
+        public int ClientId { get; set; }
         public string ClientName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

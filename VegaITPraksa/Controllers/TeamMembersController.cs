@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VegaITPraksa.DTO;
 using VegaITPraksa.Models;
 using VegaITPraksa.Services;
 
@@ -15,22 +17,31 @@ namespace VegaITPraksa.Controllers
     {
 
         private readonly ITeamMemberService _teamMemberService;
+        private readonly IMapper _mapper;
 
-        public TeamMembersController(ITeamMemberService teamMemberService)
+
+        public TeamMembersController(ITeamMemberService teamMemberService, IMapper mapper)
         {
             _teamMemberService = teamMemberService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TeamMember>> GetAllTeamMembers()
+        public async Task<IEnumerable<TeamMemberDTO>> GetAllTeamMembers()
         {
-            return await _teamMemberService.Get();
+            var teamMember = await _teamMemberService.Get();
+            var mapperTeamMember = _mapper.Map<TeamMemberDTO[]>(teamMember);
+
+            return mapperTeamMember;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeamMember>> GetTeamMember(int id)
+        public async Task<ActionResult<TeamMemberDTO>> GetTeamMember(int id)
         {
-            return await _teamMemberService.Get(id);
+            var teamMember = await _teamMemberService.Get(id);
+            var mapperTeamMemberId = _mapper.Map<TeamMemberDTO>(teamMember);
+
+            return mapperTeamMemberId;
         }
 
         [HttpPost]
@@ -62,8 +73,6 @@ namespace VegaITPraksa.Controllers
 
             await _teamMemberService.Delete(teamMemberToDelete.TeamMemberId);
             return NoContent();
-
-
         }
 
     }
