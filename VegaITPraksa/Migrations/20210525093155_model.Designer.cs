@@ -9,8 +9,8 @@ using VegaITPraksa.Data;
 namespace VegaITPraksa.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210524081522_models")]
-    partial class models
+    [Migration("20210525093155_model")]
+    partial class model
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,9 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Category", b =>
                 {
-                    b.Property<Guid>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
                         .HasColumnType("longtext");
@@ -35,9 +35,9 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Client", b =>
                 {
-                    b.Property<Guid>("ClientId")
+                    b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
@@ -61,17 +61,14 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
                 {
-                    b.Property<Guid>("ProjectId")
+                    b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
                     b.Property<bool>("Archived")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("CustomerClientId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int?>("LeadTeamMemberId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectDescription")
@@ -80,11 +77,14 @@ namespace VegaITPraksa.Migrations
                     b.Property<int>("ProjectStatus")
                         .HasColumnType("int");
 
+                    b.Property<int>("TeamMemberId")
+                        .HasColumnType("int");
+
                     b.HasKey("ProjectId");
 
-                    b.HasIndex("CustomerClientId");
+                    b.HasIndex("ClientId");
 
-                    b.HasIndex("LeadTeamMemberId");
+                    b.HasIndex("TeamMemberId");
 
                     b.ToTable("Project");
                 });
@@ -100,7 +100,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Role");
+                    b.ToTable("role");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>
@@ -121,7 +121,7 @@ namespace VegaITPraksa.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("TeamMemberRoleRoleId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeamMemberStatus")
@@ -132,28 +132,28 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("TeamMemberId");
 
-                    b.HasIndex("TeamMemberRoleRoleId");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("team_member");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TimeSheet", b =>
                 {
-                    b.Property<Guid>("TimeSheetId")
+                    b.Property<int>("TimeSheetId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Overtime")
                         .HasColumnType("double");
 
-                    b.Property<Guid?>("ProjectId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("TeamMemberId")
                         .HasColumnType("int");
@@ -184,11 +184,15 @@ namespace VegaITPraksa.Migrations
                 {
                     b.HasOne("VegaITPraksa.Models.Client", "Customer")
                         .WithMany("Projects")
-                        .HasForeignKey("CustomerClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VegaITPraksa.Models.TeamMember", "Lead")
                         .WithMany("Projects")
-                        .HasForeignKey("LeadTeamMemberId");
+                        .HasForeignKey("TeamMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -199,7 +203,9 @@ namespace VegaITPraksa.Migrations
                 {
                     b.HasOne("VegaITPraksa.Models.Role", "TeamMemberRole")
                         .WithMany("TeamMembers")
-                        .HasForeignKey("TeamMemberRoleRoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TeamMemberRole");
                 });
@@ -208,15 +214,21 @@ namespace VegaITPraksa.Migrations
                 {
                     b.HasOne("VegaITPraksa.Models.Category", "Category")
                         .WithMany("TimeSheet")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VegaITPraksa.Models.Client", "Client")
                         .WithMany("TimeSheet")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VegaITPraksa.Models.Project", "Project")
                         .WithMany("TimeSheet")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VegaITPraksa.Models.TeamMember", null)
                         .WithMany("TimeSheets")
