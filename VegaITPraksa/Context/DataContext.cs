@@ -15,6 +15,7 @@ namespace VegaITPraksa.Data
         }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

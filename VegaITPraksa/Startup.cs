@@ -34,6 +34,7 @@ namespace VegaITPraksa
         {
             services.AddScoped<ITeamMemberService, TeamMemberRepository>();
             services.AddScoped<IRoleService, RoleRepository>();
+            services.AddScoped<IClientService, ClientRepository>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
