@@ -21,6 +21,9 @@ namespace VegaITPraksa.DTO
             CreateMap<Category, CategoryDTO>();
             CreateMap<ProjectDTO, Project>();
             CreateMap<Project, ProjectDTO>();
+            CreateMap<TimeSheetDTO, TimeSheet>();
+            CreateMap<TimeSheet, TimeSheetDTO>();
+
             CreateMap<TeamMemberProjectDTO, TeamMemberProject>();
             CreateMap<TeamMemberProject, TeamMemberProjectDTO>();
         }
