@@ -72,10 +72,16 @@ namespace VegaITPraksa.Migrations
                     b.Property<string>("ProjectDescription")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("ProjectStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamMemberId")
+                    b.Property<int>("TeamLeadId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeamMemberId")
                         .HasColumnType("int");
 
                     b.HasKey("ProjectId");
@@ -135,6 +141,21 @@ namespace VegaITPraksa.Migrations
                     b.ToTable("team_member");
                 });
 
+            modelBuilder.Entity("VegaITPraksa.Models.TeamMemberProject", b =>
+                {
+                    b.Property<int>("TeamMemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamMemberId", "ProjectId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("team_member/project");
+                });
+
             modelBuilder.Entity("VegaITPraksa.Models.TimeSheet", b =>
                 {
                     b.Property<int>("TimeSheetId")
@@ -180,21 +201,19 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
                 {
-                    b.HasOne("VegaITPraksa.Models.Client", "Customer")
+                    b.HasOne("VegaITPraksa.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VegaITPraksa.Models.TeamMember", "Lead")
-                        .WithMany("Projects")
-                        .HasForeignKey("TeamMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VegaITPraksa.Models.TeamMember", "TeamLead")
+                        .WithMany()
+                        .HasForeignKey("TeamMemberId");
 
-                    b.Navigation("Customer");
+                    b.Navigation("Client");
 
-                    b.Navigation("Lead");
+                    b.Navigation("TeamLead");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>
@@ -206,6 +225,25 @@ namespace VegaITPraksa.Migrations
                         .IsRequired();
 
                     b.Navigation("TeamMemberRole");
+                });
+
+            modelBuilder.Entity("VegaITPraksa.Models.TeamMemberProject", b =>
+                {
+                    b.HasOne("VegaITPraksa.Models.Project", "Project")
+                        .WithMany("TeamMemberProjects")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VegaITPraksa.Models.TeamMember", "TeamMember")
+                        .WithMany("TeamMemberProjects")
+                        .HasForeignKey("TeamMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("TeamMember");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.TimeSheet", b =>
@@ -253,6 +291,8 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
                 {
+                    b.Navigation("TeamMemberProjects");
+
                     b.Navigation("TimeSheet");
                 });
 
@@ -263,7 +303,7 @@ namespace VegaITPraksa.Migrations
 
             modelBuilder.Entity("VegaITPraksa.Models.TeamMember", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("TeamMemberProjects");
 
                     b.Navigation("TimeSheets");
                 });

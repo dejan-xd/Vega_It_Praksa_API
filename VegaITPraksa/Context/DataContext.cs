@@ -9,18 +9,22 @@ namespace VegaITPraksa.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-            //Database.EnsureCreated();
-        }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<TeamMemberProject> TeamMemberProjects { get; set; }
+
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+            //Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<TeamMemberProject>().HasKey(i => new { i.TeamMemberId, i.ProjectId });
         }
     }
 }

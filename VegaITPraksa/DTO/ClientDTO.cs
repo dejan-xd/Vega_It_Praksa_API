@@ -16,9 +16,12 @@ namespace VegaITPraksa.DTO
         [Required]
         public string City { get; set; }
         [Required]
-        public int PostalCode { get; set; }
+        public int ZipCode { get; set; }
         [Required]
         public string Country { get; set; }
+
+        //public virtual ICollection<ProjectDTO> Projects { get; set; }
+
 
         public ClientDTO()
         {

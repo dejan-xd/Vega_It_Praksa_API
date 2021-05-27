@@ -21,10 +21,10 @@ namespace VegaITPraksa.Models
             TeamMembers = new HashSet<TeamMember>();
         }
 
-        public Role(RoleDTO roleDto)
-        {
-            RoleName = roleDto.RoleName;
-        }
+        //public Role(RoleDTO roleDto)
+        //{
+        //    RoleName = roleDto.RoleName;
+        //}
 
 
 

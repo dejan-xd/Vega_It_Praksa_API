@@ -26,15 +26,19 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Role>> GetAllRoles()
+        public async Task<IEnumerable<RoleDTO>> GetAllRoles()
         {
-            return await _roleService.Get();
+            var role = await _roleService.Get();
+            var mapperRole = _mapper.Map<RoleDTO[]>(role);
+            return mapperRole;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Role>> GetRole(int id)
+        public async Task<ActionResult<RoleDTO>> GetRole(int id)
         {
-            return await _roleService.Get(id);
+            var role = await _roleService.Get(id);
+            var mapperRole = _mapper.Map<RoleDTO>(role);
+            return mapperRole;
         }
 
         [HttpPost]
