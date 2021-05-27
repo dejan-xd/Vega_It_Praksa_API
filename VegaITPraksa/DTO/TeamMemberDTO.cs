@@ -43,16 +43,21 @@ namespace VegaITPraksa.DTO
             TeamMemberStatus = teamMemberStatus;
         }
 
-        public TeamMemberDTO(TeamMember teamMember)
-        {
-            TeamMemberId = teamMember.TeamMemberId;
-            Name = teamMember.Name;
-            HoursPerWeek = teamMember.HoursPerWeek;
-            Username = teamMember.Username;
-            Email = teamMember.Email;
-            Password = teamMember.Password;
-            TeamMemberStatus = teamMember.TeamMemberStatus;
-        }
 
+        //private string username;
+
+        //[JsonProperty("username")]
+        //public string Username
+        //{
+        //    get
+        //    {
+        //        return username;
+        //    }
+        //    set
+        //    {
+        //        if (!string.IsNullOrWhiteSpace(value))
+        //            username = value;
+        //    }
+        //}
     }
 }
