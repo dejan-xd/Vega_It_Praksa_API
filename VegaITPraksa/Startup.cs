@@ -37,6 +37,7 @@ namespace VegaITPraksa
             services.AddScoped<ICategoryService, CategoryRepository>();
             services.AddScoped<IClientService, ClientRepository>();
             services.AddScoped<IProjectService, ProjectRepository>();
+            services.AddScoped<ITimeSheetService, TimeSheetRepository>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
