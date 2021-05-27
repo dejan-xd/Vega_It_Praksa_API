@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace VegaITPraksa.Models
 {
+    [Table("client")]
     public class Client
     {
         public Client()

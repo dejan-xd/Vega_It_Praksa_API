@@ -9,7 +9,7 @@ using VegaITPraksa.Data;
 namespace VegaITPraksa.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210525093155_model")]
+    [Migration("20210525124857_model")]
     partial class model
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("category");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Client", b =>
@@ -56,7 +56,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("ClientId");
 
-                    b.ToTable("Client");
+                    b.ToTable("client");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
@@ -86,7 +86,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasIndex("TeamMemberId");
 
-                    b.ToTable("Project");
+                    b.ToTable("project");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Role", b =>

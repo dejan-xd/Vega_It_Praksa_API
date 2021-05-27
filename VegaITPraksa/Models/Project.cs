@@ -13,6 +13,8 @@ namespace VegaITPraksa.Models
         INACTIVE
     }
 
+    [Table("project")]
+
     public class Project
     {
         public Project()

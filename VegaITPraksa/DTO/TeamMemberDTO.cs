@@ -24,7 +24,6 @@ namespace VegaITPraksa.DTO
         [Required]
         public string Password { get; set; }
         [Required]
-        [JsonConverter(typeof(StringEnumConverter))]
         public TeamMemberStatus TeamMemberStatus { get; set; }
         [Required]
         public int RoleId { get; set; }

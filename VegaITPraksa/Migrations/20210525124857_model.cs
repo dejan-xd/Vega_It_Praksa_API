@@ -12,7 +12,7 @@ namespace VegaITPraksa.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "category",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
@@ -22,12 +22,12 @@ namespace VegaITPraksa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryId);
+                    table.PrimaryKey("PK_category", x => x.CategoryId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Client",
+                name: "client",
                 columns: table => new
                 {
                     ClientId = table.Column<int>(type: "int", nullable: false)
@@ -44,7 +44,7 @@ namespace VegaITPraksa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Client", x => x.ClientId);
+                    table.PrimaryKey("PK_client", x => x.ClientId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -94,7 +94,7 @@ namespace VegaITPraksa.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Project",
+                name: "project",
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(type: "int", nullable: false)
@@ -108,15 +108,15 @@ namespace VegaITPraksa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Project", x => x.ProjectId);
+                    table.PrimaryKey("PK_project", x => x.ProjectId);
                     table.ForeignKey(
-                        name: "FK_Project_Client_ClientId",
+                        name: "FK_project_client_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Client",
+                        principalTable: "client",
                         principalColumn: "ClientId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Project_team_member_TeamMemberId",
+                        name: "FK_project_team_member_TeamMemberId",
                         column: x => x.TeamMemberId,
                         principalTable: "team_member",
                         principalColumn: "TeamMemberId",
@@ -144,21 +144,21 @@ namespace VegaITPraksa.Migrations
                 {
                     table.PrimaryKey("PK_time_sheet", x => x.TimeSheetId);
                     table.ForeignKey(
-                        name: "FK_time_sheet_Category_CategoryId",
+                        name: "FK_time_sheet_category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_time_sheet_Client_ClientId",
+                        name: "FK_time_sheet_client_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Client",
+                        principalTable: "client",
                         principalColumn: "ClientId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_time_sheet_Project_ProjectId",
+                        name: "FK_time_sheet_project_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Project",
+                        principalTable: "project",
                         principalColumn: "ProjectId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -171,13 +171,13 @@ namespace VegaITPraksa.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_ClientId",
-                table: "Project",
+                name: "IX_project_ClientId",
+                table: "project",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_TeamMemberId",
-                table: "Project",
+                name: "IX_project_TeamMemberId",
+                table: "project",
                 column: "TeamMemberId");
 
             migrationBuilder.CreateIndex(
@@ -212,13 +212,13 @@ namespace VegaITPraksa.Migrations
                 name: "time_sheet");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "category");
 
             migrationBuilder.DropTable(
-                name: "Project");
+                name: "project");
 
             migrationBuilder.DropTable(
-                name: "Client");
+                name: "client");
 
             migrationBuilder.DropTable(
                 name: "team_member");

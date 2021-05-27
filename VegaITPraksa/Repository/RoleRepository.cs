@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VegaITPraksa.Data;
+using VegaITPraksa.DTO;
 using VegaITPraksa.Models;
 using VegaITPraksa.Services;
 

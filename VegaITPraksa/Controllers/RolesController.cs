@@ -26,12 +26,9 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<RoleDTO>> GetAllRoles()
+        public async Task<IEnumerable<Role>> GetAllRoles()
         {
-            var role = await _roleService.Get();
-            var mapperRole = _mapper.Map<RoleDTO[]>(role);
-
-            return mapperRole;
+            return await _roleService.Get();
         }
 
         [HttpGet("{id}")]
@@ -41,21 +38,25 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Role>> PostRole([FromBody] Role role)
+        public async Task<ActionResult<RoleDTO>> PostRole(RoleDTO roleDto)
         {
-            var newRole = await _roleService.Create(role);
+            var mapperRole = _mapper.Map<Role>(roleDto);
+            var newRole = await _roleService.Create(mapperRole);
+
             return CreatedAtAction(nameof(GetRole), new { id = newRole.RoleId }, newRole);
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutNewRole(int id, [FromBody] Role role)
+        public async Task<ActionResult> PutRole(int id, RoleDTO roleDto)
         {
-            if (id != role.RoleId)
+            if (id != roleDto.RoleId)
             {
                 return BadRequest();
             }
 
-            await _roleService.Update(role);
+            var mapperRole = _mapper.Map<Role>(roleDto);
+
+            await _roleService.Update(mapperRole);
 
             return NoContent();
         }

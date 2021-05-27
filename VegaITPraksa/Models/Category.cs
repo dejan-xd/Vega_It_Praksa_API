@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace VegaITPraksa.Models
 {
+    [Table("category")]
     public class Category
     {
         public Category()
