@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,10 +11,14 @@ namespace VegaITPraksa.DTO
     {
         public SimpleMappings()
         {
-            CreateMap<Role, RoleDTO>();
+            CreateMap<TeamMemberDTO, TeamMember>();
             CreateMap<TeamMember, TeamMemberDTO>();
-            CreateMap<Project, ProjectDTO>();
+            CreateMap<RoleDTO, Role>();
+            CreateMap<ClientDTO, Client>();
+            CreateMap<Client, ClientDTO>();
+            CreateMap<CategoryDTO, Category>();
             CreateMap<ProjectDTO, Project>();
+            CreateMap<Project, ProjectDTO>();
         }
     }
 }

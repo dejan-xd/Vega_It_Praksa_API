@@ -11,6 +11,23 @@ namespace VegaITPraksa.DTO
 {
     public class TeamMemberDTO
     {
+        public int TeamMemberId { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public double HoursPerWeek { get; set; }
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public TeamMemberStatus TeamMemberStatus { get; set; }
+        [Required]
+        public int RoleId { get; set; }
+
         public TeamMemberDTO()
         {
         }
@@ -27,23 +44,20 @@ namespace VegaITPraksa.DTO
         }
 
 
-        public int TeamMemberId { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public double HoursPerWeek { get; set; }
-        [Required]
-        public string Username { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public TeamMemberStatus TeamMemberStatus { get; set; }
-        [Required]
-        public int RoleId { get; set; }
+        //private string username;
 
+        //[JsonProperty("username")]
+        //public string Username
+        //{
+        //    get
+        //    {
+        //        return username;
+        //    }
+        //    set
+        //    {
+        //        if (!string.IsNullOrWhiteSpace(value))
+        //            username = value;
+        //    }
+        //}
     }
 }

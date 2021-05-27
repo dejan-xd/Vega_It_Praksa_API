@@ -7,17 +7,14 @@ using VegaITPraksa.Models;
 
 namespace VegaITPraksa.DTO
 {
-    public class RoleDTO
+    public class CategoryDTO
     {
-        public int RoleId { get; set; }
-        [Required]
-        public string RoleName { get; set; }
-        public virtual ICollection<TeamMemberDTO> TeamMembers { get; set; }
-
-        public RoleDTO()
+        public CategoryDTO()
         {
         }
 
+        public int CategoryId { get; set; }
+        [Required]
+        public string CategoryName { get; set; }
     }
-
 }
