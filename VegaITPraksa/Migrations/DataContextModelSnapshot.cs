@@ -28,7 +28,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("category");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Client", b =>
@@ -54,7 +54,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasKey("ClientId");
 
-                    b.ToTable("Client");
+                    b.ToTable("client");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
@@ -84,7 +84,7 @@ namespace VegaITPraksa.Migrations
 
                     b.HasIndex("TeamMemberId");
 
-                    b.ToTable("Project");
+                    b.ToTable("project");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Role", b =>

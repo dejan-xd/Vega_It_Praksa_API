@@ -11,8 +11,10 @@ namespace VegaITPraksa.DTO
     {
         public SimpleMappings()
         {
-            CreateMap<Role, RoleDTO>();
+            CreateMap<RoleDTO, Role>();
+            CreateMap<TeamMemberDTO, TeamMember>();
             CreateMap<TeamMember, TeamMemberDTO>();
+            CreateMap<CategoryDTO, Category>();
         }
     }
 }

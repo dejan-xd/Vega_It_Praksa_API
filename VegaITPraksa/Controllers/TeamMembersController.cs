@@ -19,7 +19,6 @@ namespace VegaITPraksa.Controllers
         private readonly ITeamMemberService _teamMemberService;
         private readonly IMapper _mapper;
 
-
         public TeamMembersController(ITeamMemberService teamMemberService, IMapper mapper)
         {
             _teamMemberService = teamMemberService;
@@ -31,8 +30,10 @@ namespace VegaITPraksa.Controllers
         {
             var teamMember = await _teamMemberService.Get();
             var mapperTeamMember = _mapper.Map<TeamMemberDTO[]>(teamMember);
-
             return mapperTeamMember;
+
+            //return await _teamMemberService.Get();
+
         }
 
         [HttpGet("{id}")]
@@ -40,32 +41,38 @@ namespace VegaITPraksa.Controllers
         {
             var teamMember = await _teamMemberService.Get(id);
             var mapperTeamMemberId = _mapper.Map<TeamMemberDTO>(teamMember);
-
             return mapperTeamMemberId;
+
+            //return await _teamMemberService.Get(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<TeamMember>> PostTeamMember([FromBody] TeamMember teamMember)
+        public async Task<ActionResult<TeamMemberDTO>> PostTeamMember(TeamMemberDTO teamMemberDto)
         {
-            var newTeamMember = await _teamMemberService.Create(teamMember);
+            var mapperTeamMember = _mapper.Map<TeamMember>(teamMemberDto);
+            var newTeamMember = await _teamMemberService.Create(mapperTeamMember);
+
             return CreatedAtAction(nameof(GetTeamMember), new { id = newTeamMember.TeamMemberId }, newTeamMember);
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutNewTeamMember(int id, [FromBody] TeamMember teamMember)
+        public async Task<ActionResult> PutTeamMember(int id, TeamMemberDTO teamMemberDto)
         {
-            if(id != teamMember.TeamMemberId)
+            if (id != teamMemberDto.TeamMemberId)
             {
                 return BadRequest();
             }
 
-            await _teamMemberService.Update(teamMember);
+            var mapperTeamMember = _mapper.Map<TeamMember>(teamMemberDto);
+
+            await _teamMemberService.Update(mapperTeamMember);
 
             return NoContent();
+
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteTeamMember (int id)
+        public async Task<ActionResult> DeleteTeamMember(int id)
         {
             var teamMemberToDelete = await _teamMemberService.Get(id);
             if (teamMemberToDelete == null)
