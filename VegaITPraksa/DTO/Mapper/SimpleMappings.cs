@@ -13,6 +13,8 @@ namespace VegaITPraksa.DTO
         {
             CreateMap<Role, RoleDTO>();
             CreateMap<TeamMember, TeamMemberDTO>();
+            CreateMap<Project, ProjectDTO>();
+            CreateMap<ProjectDTO, Project>();
         }
     }
 }
