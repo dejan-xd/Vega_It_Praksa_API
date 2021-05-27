@@ -11,8 +11,8 @@ namespace VegaITPraksa.DTO
     {
 
         public int ProjectId { get; set; }
-        //[Required]
-        //public string ProjectName { get; set; }
+        [Required]
+        public string ProjectName { get; set; }
         [Required]
         public string ProjectDescription { get; set; }
         [Required]
@@ -22,9 +22,12 @@ namespace VegaITPraksa.DTO
         [Required]
         public int ClientId { get; set; }
 
-        // make it as a team lead
         [Required]
         public int TeamLeadId { get; set; }
+        //public virtual ICollection<TeamMemberProject> TeamMemberProjects { get; set; }
+
+        //[Required]
+        //public int TeamMemberId { get; set; }
 
         // add users on each project
         //public virtual ICollection<TeamMemberDTO> TeamMembers { get; set; }

@@ -35,9 +35,12 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(int id)
+        public async Task<ActionResult<ProjectDTO>> GetProject(int id)
         {
-            return await _projectService.Get(id);
+            var project = await _projectService.Get(id);
+            var mapperProject = _mapper.Map<ProjectDTO>(project);
+
+            return mapperProject;
         }
 
         [HttpPost]

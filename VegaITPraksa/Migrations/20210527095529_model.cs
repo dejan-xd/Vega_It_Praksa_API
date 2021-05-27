@@ -99,12 +99,15 @@ namespace VegaITPraksa.Migrations
                 {
                     ProjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ProjectName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ProjectDescription = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProjectStatus = table.Column<int>(type: "int", nullable: false),
                     Archived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    TeamMemberId = table.Column<int>(type: "int", nullable: false)
+                    TeamLeadId = table.Column<int>(type: "int", nullable: false),
+                    TeamMemberId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,6 +120,31 @@ namespace VegaITPraksa.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_project_team_member_TeamMemberId",
+                        column: x => x.TeamMemberId,
+                        principalTable: "team_member",
+                        principalColumn: "TeamMemberId",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "team_member/project",
+                columns: table => new
+                {
+                    TeamMemberId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_team_member/project", x => new { x.TeamMemberId, x.ProjectId });
+                    table.ForeignKey(
+                        name: "FK_team_member/project_project_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "project",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_team_member/project_team_member_TeamMemberId",
                         column: x => x.TeamMemberId,
                         principalTable: "team_member",
                         principalColumn: "TeamMemberId",
@@ -186,6 +214,11 @@ namespace VegaITPraksa.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_team_member/project_ProjectId",
+                table: "team_member/project",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_time_sheet_CategoryId",
                 table: "time_sheet",
                 column: "CategoryId");
@@ -208,6 +241,9 @@ namespace VegaITPraksa.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "team_member/project");
+
             migrationBuilder.DropTable(
                 name: "time_sheet");
 

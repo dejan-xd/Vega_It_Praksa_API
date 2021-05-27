@@ -19,7 +19,7 @@ namespace VegaITPraksa.Models
         public TeamMember()
         {
             TimeSheets = new HashSet<TimeSheet>();
-            Projects = new HashSet<Project>();
+            TeamMemberProjects = new HashSet<TeamMemberProject>();
         }
 
         [Key]
@@ -34,7 +34,7 @@ namespace VegaITPraksa.Models
         [ForeignKey("RoleId")]
         public virtual Role TeamMemberRole { get; set; }
         public virtual ICollection<TimeSheet> TimeSheets { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<TeamMemberProject> TeamMemberProjects { get; set; }
 
     }
 }

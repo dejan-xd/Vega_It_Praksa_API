@@ -26,15 +26,21 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Category>> GetAllCategories()
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategories()
         {
-            return await _categoryService.Get(); ;
+            var category = await _categoryService.Get();
+            var mapperCategory = _mapper.Map<CategoryDTO[]>(category);
+
+            return mapperCategory;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryDTO>> GetCategory(int id)
         {
-            return await _categoryService.Get(id);
+            var category = await _categoryService.Get(id);
+            var mapperCategory = _mapper.Map<CategoryDTO>(category);
+
+            return mapperCategory;
         }
 
         [HttpPost]

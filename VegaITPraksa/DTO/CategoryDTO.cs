@@ -9,12 +9,13 @@ namespace VegaITPraksa.DTO
 {
     public class CategoryDTO
     {
-        public CategoryDTO()
-        {
-        }
 
         public int CategoryId { get; set; }
         [Required]
         public string CategoryName { get; set; }
+
+        public CategoryDTO()
+        {
+        }
     }
 }

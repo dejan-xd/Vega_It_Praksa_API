@@ -35,14 +35,15 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<Project>> Get()
         {
-            return await _db.Projects.Include(i => i.Customer).ToListAsync();
-            //return await _db.Project.ToListAsync();
+            //return await _db.Projects.Include(i => i.Client).ToListAsync();
+
+            return await _db.Projects.ToListAsync();
         }
 
         public async Task<Project> Get(int id)
         {
-            return await _db.Projects.Include(i => i.Customer).FirstOrDefaultAsync(i => i.ProjectId == id);
-            //return await _db.Project.FindAsync(id);
+            return await _db.Projects.Include(i => i.Client).FirstOrDefaultAsync(i => i.ProjectId == id);
+            //return await _db.Projects.FindAsync(id);
         }
 
         public async Task Update(Project project)
