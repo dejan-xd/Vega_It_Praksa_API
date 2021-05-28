@@ -27,6 +27,10 @@ namespace VegaITPraksa.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+        public int TeamMemberId { get; set; }
+        [ForeignKey("TeamMemberId")]
+        public virtual TeamMember TeamMember { get; set; }
+
 
     }
 }

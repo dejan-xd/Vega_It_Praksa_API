@@ -24,6 +24,8 @@ namespace VegaITPraksa.DTO
         public int ProjectId { get; set; }
         [Required]
         public int CategoryId { get; set; }
+        [Required]
+        public int TeamMemberId { get; set; }
 
         public TimeSheetDTO()
         {

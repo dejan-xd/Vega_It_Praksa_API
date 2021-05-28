@@ -25,6 +25,7 @@ namespace VegaITPraksa.Controllers
             _mapper = mapper;
         }
 
+
         [HttpGet]
         public async Task<IEnumerable<CategoryDTO>> GetAllCategories()
         {
