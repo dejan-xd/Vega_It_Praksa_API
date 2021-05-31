@@ -18,7 +18,7 @@ namespace VegaITPraksa.DTO
         [Required]
         public int ZipCode { get; set; }
         [Required]
-        public string Country { get; set; }
+        public int CountryId { get; set; }
 
         //public virtual ICollection<ProjectDTO> Projects { get; set; }
 

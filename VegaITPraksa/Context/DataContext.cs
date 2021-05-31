@@ -16,6 +16,7 @@ namespace VegaITPraksa.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<TeamMemberProject> TeamMemberProjects { get; set; }
         public DbSet<TimeSheet> TimeSheets { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

@@ -26,21 +26,23 @@ namespace VegaITPraksa.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ClientDTO>> GetAllClients()
+        public async Task<IEnumerable<Client>> GetAllClients()
         {
-            var client = await _clientService.Get();
-            var mapperClient = _mapper.Map<ClientDTO[]>(client);
+            //var client = await _clientService.Get();
+            //var mapperClient = _mapper.Map<Client[]>(client);
 
-            return mapperClient;
+            //return mapperClient;
+            return await _clientService.Get();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ClientDTO>> GetClient(int id)
+        public async Task<ActionResult<Client>> GetClient(int id)
         {
-            var client = await _clientService.Get(id);
-            var mapperClient = _mapper.Map<ClientDTO>(client);
+            //var client = await _clientService.Get(id);
+            //var mapperClient = _mapper.Map<Client>(client);
 
-            return mapperClient;
+            //return mapperClient;
+            return await _clientService.Get(id);
         }
 
         [HttpPost]
