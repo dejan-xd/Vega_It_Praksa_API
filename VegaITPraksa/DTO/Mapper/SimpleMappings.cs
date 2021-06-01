@@ -23,9 +23,10 @@ namespace VegaITPraksa.DTO
             CreateMap<Project, ProjectDTO>();
             CreateMap<TimeSheetDTO, TimeSheet>();
             CreateMap<TimeSheet, TimeSheetDTO>();
-
             CreateMap<TeamMemberProjectDTO, TeamMemberProject>();
             CreateMap<TeamMemberProject, TeamMemberProjectDTO>();
+            CreateMap<CountryDTO, Country>();
+            CreateMap<Country, CountryDTO>();
         }
     }
 }

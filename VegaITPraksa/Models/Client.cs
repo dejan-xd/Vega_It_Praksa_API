@@ -19,10 +19,13 @@ namespace VegaITPraksa.Models
         [Key]
         public int ClientId { get; set; }
         public string ClientName { get; set; }
-        public string Address { get; set; }
+        public string Address { get; set; } 
         public string City { get; set; }
         public int ZipCode { get; set; }
         public string Country { get; set; }
+        public int CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        public virtual Country ClientCountry { get; set; }
         public virtual ICollection<TimeSheet> TimeSheet { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
 

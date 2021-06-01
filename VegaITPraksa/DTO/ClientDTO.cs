@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VegaITPraksa.Models;
 
 namespace VegaITPraksa.DTO
 {
@@ -18,8 +19,8 @@ namespace VegaITPraksa.DTO
         [Required]
         public int ZipCode { get; set; }
         [Required]
-        public string Country { get; set; }
-
+        public int CountryId { get; set; }
+        public virtual Country ClientCountry { get; set; }
         //public virtual ICollection<ProjectDTO> Projects { get; set; }
 
 

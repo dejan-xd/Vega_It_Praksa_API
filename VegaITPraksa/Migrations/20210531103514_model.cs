@@ -27,24 +27,17 @@ namespace VegaITPraksa.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "client",
+                name: "country",
                 columns: table => new
                 {
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    CountryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClientName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Address = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    City = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ZipCode = table.Column<int>(type: "int", nullable: false),
-                    Country = table.Column<string>(type: "longtext", nullable: true)
+                    CountryName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_client", x => x.ClientId);
+                    table.PrimaryKey("PK_country", x => x.CountryId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -60,6 +53,35 @@ namespace VegaITPraksa.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_role", x => x.RoleId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "client",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ClientName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Address = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    City = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ZipCode = table.Column<int>(type: "int", nullable: false),
+                    Country = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CountryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_client", x => x.ClientId);
+                    table.ForeignKey(
+                        name: "FK_client_country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "country",
+                        principalColumn: "CountryId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -166,7 +188,7 @@ namespace VegaITPraksa.Migrations
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    TeamMemberId = table.Column<int>(type: "int", nullable: true)
+                    TeamMemberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,9 +216,14 @@ namespace VegaITPraksa.Migrations
                         column: x => x.TeamMemberId,
                         principalTable: "team_member",
                         principalColumn: "TeamMemberId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_client_CountryId",
+                table: "client",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_project_ClientId",
@@ -258,6 +285,9 @@ namespace VegaITPraksa.Migrations
 
             migrationBuilder.DropTable(
                 name: "team_member");
+
+            migrationBuilder.DropTable(
+                name: "country");
 
             migrationBuilder.DropTable(
                 name: "role");

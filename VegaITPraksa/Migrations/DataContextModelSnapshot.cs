@@ -49,12 +49,31 @@ namespace VegaITPraksa.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
                     b.HasKey("ClientId");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("client");
+                });
+
+            modelBuilder.Entity("VegaITPraksa.Models.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("country");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
@@ -174,7 +193,7 @@ namespace VegaITPraksa.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeamMemberId")
+                    b.Property<int>("TeamMemberId")
                         .HasColumnType("int");
 
                     b.Property<double>("Time")
@@ -197,6 +216,17 @@ namespace VegaITPraksa.Migrations
                     b.HasIndex("TeamMemberId");
 
                     b.ToTable("time_sheet");
+                });
+
+            modelBuilder.Entity("VegaITPraksa.Models.Client", b =>
+                {
+                    b.HasOne("VegaITPraksa.Models.Country", "ClientCountry")
+                        .WithMany("Clients")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClientCountry");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>
@@ -266,15 +296,19 @@ namespace VegaITPraksa.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VegaITPraksa.Models.TeamMember", null)
+                    b.HasOne("VegaITPraksa.Models.TeamMember", "TeamMember")
                         .WithMany("TimeSheets")
-                        .HasForeignKey("TeamMemberId");
+                        .HasForeignKey("TeamMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
                     b.Navigation("Client");
 
                     b.Navigation("Project");
+
+                    b.Navigation("TeamMember");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Category", b =>
@@ -287,6 +321,11 @@ namespace VegaITPraksa.Migrations
                     b.Navigation("Projects");
 
                     b.Navigation("TimeSheet");
+                });
+
+            modelBuilder.Entity("VegaITPraksa.Models.Country", b =>
+                {
+                    b.Navigation("Clients");
                 });
 
             modelBuilder.Entity("VegaITPraksa.Models.Project", b =>

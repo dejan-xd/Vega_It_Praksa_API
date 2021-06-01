@@ -32,6 +32,7 @@ namespace VegaITPraksa.Controllers
             var mapperClient = _mapper.Map<ClientDTO[]>(client);
 
             return mapperClient;
+            //return await _clientService.Get();
         }
 
         [HttpGet("{id}")]
@@ -41,6 +42,7 @@ namespace VegaITPraksa.Controllers
             var mapperClient = _mapper.Map<ClientDTO>(client);
 
             return mapperClient;
+            //return await _clientService.Get(id);
         }
 
         [HttpPost]
