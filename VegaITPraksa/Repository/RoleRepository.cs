@@ -37,7 +37,7 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<Role>> Get()
         {
-            return await _db.Roles.Include(i => i.TeamMembers).ToListAsync();
+            return await _db.Roles.OrderBy(i => i.RoleName).Include(i => i.TeamMembers).ToListAsync();
             //return await _db.Roles.ToListAsync();
         }
 

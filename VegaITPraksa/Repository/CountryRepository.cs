@@ -36,7 +36,7 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<Country>> Get()
         {
-            return await _db.Countries.ToListAsync();
+            return await _db.Countries.OrderBy(i => i.CountryName).ToListAsync();
         }
 
         public async Task<Country> Get(int id)

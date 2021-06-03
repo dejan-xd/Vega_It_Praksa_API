@@ -82,5 +82,18 @@ namespace VegaITPraksa.Controllers
             return NoContent();
         }
 
+
+
+        [HttpGet("{role}/role")]
+        public async Task<IEnumerable<TeamMemberDTO>> GetAllTeamMembersByRole(string role)
+        {
+            var teamMember = await _teamMemberService.GetByRole(role);
+            var mapperTeamMember = _mapper.Map<TeamMemberDTO[]>(teamMember);
+            return mapperTeamMember;
+
+            //return await _teamMemberService.Get();
+
+        }
+
     }
 }

@@ -13,5 +13,8 @@ namespace VegaITPraksa.Services
         Task<TeamMember> Create(TeamMember teamMember);
         Task Update(TeamMember teamMember);
         Task Delete(int id);
+
+        Task<IEnumerable<TeamMember>> GetByRole(string role);
+
     }
 }
