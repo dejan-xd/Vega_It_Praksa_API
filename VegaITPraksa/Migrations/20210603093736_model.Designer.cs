@@ -9,7 +9,7 @@ using VegaITPraksa.Data;
 namespace VegaITPraksa.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210531103514_model")]
+    [Migration("20210603093736_model")]
     partial class model
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,9 +84,6 @@ namespace VegaITPraksa.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("Archived")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
@@ -102,14 +99,11 @@ namespace VegaITPraksa.Migrations
                     b.Property<int>("TeamLeadId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeamMemberId")
-                        .HasColumnType("int");
-
                     b.HasKey("ProjectId");
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("TeamMemberId");
+                    b.HasIndex("TeamLeadId");
 
                     b.ToTable("project");
                 });
@@ -241,7 +235,9 @@ namespace VegaITPraksa.Migrations
 
                     b.HasOne("VegaITPraksa.Models.TeamMember", "TeamLead")
                         .WithMany()
-                        .HasForeignKey("TeamMemberId");
+                        .HasForeignKey("TeamLeadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
 

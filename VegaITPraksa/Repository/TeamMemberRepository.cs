@@ -36,7 +36,7 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<TeamMember>> Get()
         {
-            return await _db.TeamMembers.Include(i => i.TeamMemberRole).ToListAsync();
+            return await _db.TeamMembers.OrderBy(i => i.Name).Include(i => i.TeamMemberRole).ToListAsync();
             //return await _db.TeamMembers.ToListAsync();
         }
 
@@ -50,6 +50,16 @@ namespace VegaITPraksa.Repository
         {
             _db.Entry(teamMember).State = EntityState.Modified;
             await _db.SaveChangesAsync();
+        }
+
+
+        public async Task<IEnumerable<TeamMember>> GetByRole(string role)
+        {
+            return await _db.TeamMembers.OrderBy(i => i.Name).Include(i => i.TeamMemberRole).
+                Where(i => i.TeamMemberRole.RoleName == role).
+                Where(i=>i.TeamMemberStatus == TeamMemberStatus.ACTIVE).ToListAsync();
+            //return await _db.Clients.OrderBy(i => i.ClientName).Include(i => i.ClientCountry).ToListAsync();
+            //return await _db.TeamMembers.ToListAsync();
         }
     }
 }

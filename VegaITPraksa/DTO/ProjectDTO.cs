@@ -18,12 +18,12 @@ namespace VegaITPraksa.DTO
         [Required]
         public ProjectStatus ProjectStatus { get; set; }
         [Required]
-        public bool Archived { get; set; }
-        [Required]
         public int ClientId { get; set; }
-
+        public virtual Client Client { get; set; }
         [Required]
         public int TeamLeadId { get; set; }
+        public virtual TeamMember TeamLead { get; set; }
+
         //public virtual ICollection<TeamMemberProject> TeamMemberProjects { get; set; }
 
         //[Required]

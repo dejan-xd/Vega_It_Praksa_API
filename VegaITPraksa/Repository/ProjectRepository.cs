@@ -35,8 +35,9 @@ namespace VegaITPraksa.Repository
 
         public async Task<IEnumerable<Project>> Get()
         {
+            return await _db.Projects.OrderBy(i => i.ProjectName).Include(i => i.Client).Include(i=> i.TeamLead).ToListAsync();
             //return await _db.Projects.Include(i => i.Client).ToListAsync();
-            return await _db.Projects.ToListAsync();
+            //return await _db.Projects.ToListAsync();
         }
 
         public async Task<Project> Get(int id)

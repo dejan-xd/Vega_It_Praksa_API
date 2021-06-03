@@ -36,7 +36,7 @@ namespace VegaITPraksa.Repository
         public async Task<IEnumerable<Category>> Get()
         {
             //return await _db.Categories.Include(i => i.TimeSheet).ToListAsync();
-            return await _db.Categories.ToListAsync();
+            return await _db.Categories.OrderBy(i => i.CategoryName).ToListAsync();
 
         }
 

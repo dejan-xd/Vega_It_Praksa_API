@@ -21,27 +21,29 @@ namespace VegaITPraksa.DTO
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
+        //[Required]
+        //public string Password { get; set; }
         [Required]
         public TeamMemberStatus TeamMemberStatus { get; set; }
         [Required]
         public int RoleId { get; set; }
+        public virtual Role TeamMemberRole { get; set; }
+
 
         public TeamMemberDTO()
         {
         }
 
-        public TeamMemberDTO(int teamMemberId, string name, double hoursPerWeek, string username, string email, string password, TeamMemberStatus teamMemberStatus)
-        {
-            TeamMemberId = teamMemberId;
-            Name = name;
-            HoursPerWeek = hoursPerWeek;
-            Username = username;
-            Email = email;
-            Password = password;
-            TeamMemberStatus = teamMemberStatus;
-        }
+        //public TeamMemberDTO(int teamMemberId, string name, double hoursPerWeek, string username, string email, string password, TeamMemberStatus teamMemberStatus)
+        //{
+        //    TeamMemberId = teamMemberId;
+        //    Name = name;
+        //    HoursPerWeek = hoursPerWeek;
+        //    Username = username;
+        //    Email = email;
+        //    Password = password;
+        //    TeamMemberStatus = teamMemberStatus;
+        //}
 
 
         //private string username;

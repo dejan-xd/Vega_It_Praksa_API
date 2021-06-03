@@ -126,10 +126,8 @@ namespace VegaITPraksa.Migrations
                     ProjectDescription = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProjectStatus = table.Column<int>(type: "int", nullable: false),
-                    Archived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    TeamLeadId = table.Column<int>(type: "int", nullable: false),
-                    TeamMemberId = table.Column<int>(type: "int", nullable: true)
+                    TeamLeadId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,11 +139,11 @@ namespace VegaITPraksa.Migrations
                         principalColumn: "ClientId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_project_team_member_TeamMemberId",
-                        column: x => x.TeamMemberId,
+                        name: "FK_project_team_member_TeamLeadId",
+                        column: x => x.TeamLeadId,
                         principalTable: "team_member",
                         principalColumn: "TeamMemberId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -231,9 +229,9 @@ namespace VegaITPraksa.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_project_TeamMemberId",
+                name: "IX_project_TeamLeadId",
                 table: "project",
-                column: "TeamMemberId");
+                column: "TeamLeadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_team_member_RoleId",
