@@ -1,3 +1,3 @@
-# VegaITPraksa
+# Vega_It_Praksa_API
 
-VegaIT projekat
+Start project as 'VegaITPraksa' (http://localhost:5000/swagger/index.html)
